@@ -1,0 +1,161 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Calculator.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignHeight="800" d:DesignWidth="450"
+        MaxHeight="700" MaxWidth="450"
+        MinHeight="700" MinWidth="450"
+        x:Class="Calculator.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/logo.ico"
+        Title="Calculator" CanResize="False" 
+        FontSize="25" FontWeight="Bold" FontFamily="Comic Sans MS">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+    
+    <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+        <Border Grid.ColumnSpan="4" BorderBrush="Black" 
+                BorderThickness="5">
+            <TextBlock Text="{Binding Result}"/> 
+        </Border>
+        
+        <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button Content="+" HorizontalContentAlignment="Center" 
+                    VerticalContentAlignment="Center" Background="#FF7340"
+                    Height="100" Width="100" CornerRadius="15" Command="{Binding PlusCmd}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button Content="-" HorizontalContentAlignment="Center" 
+                        VerticalContentAlignment="Center" Background="#FF7340"
+                        Height="100" Width="100" CornerRadius="15" Command="{Binding MinusCmd}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button Content="*" HorizontalContentAlignment="Center" 
+                        VerticalContentAlignment="Center" Background="#FF7340"
+                        Height="100" Width="100" CornerRadius="15" Command="{Binding MultiplyCmd}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button Content="/" HorizontalContentAlignment="Center" 
+                        VerticalContentAlignment="Center" Background="#FF7340"
+                        Height="100" Width="100" CornerRadius="15" Command="{Binding SplitCmd}"/>
+        </StackPanel>
+        
+        
+        
+        <StackPanel Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Content="7" HorizontalContentAlignment="Center" 
+                    VerticalContentAlignment="Center" Background="#C2CAC2"
+                    Height="100" Width="100" CornerRadius="15" 
+                    CommandParameter="7" Command="{Binding NumInput}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Content="8" HorizontalContentAlignment="Center" 
+                    VerticalContentAlignment="Center" Background="#C2CAC2"
+                    Height="100" Width="100" CornerRadius="15" Command="{Binding NumInput}" CommandParameter="8"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Content="9" HorizontalContentAlignment="Center" 
+                    VerticalContentAlignment="Center" Background="#C2CAC2"
+                    Height="100" Width="100" CornerRadius="15" Command="{Binding NumInput}" CommandParameter="9"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Content="MM" HorizontalContentAlignment="Center" 
+                    VerticalContentAlignment="Center" Background="#288ECA"
+                    Height="45" Width="100" CornerRadius="15" Command="{Binding MemoryCmd}"
+                    Margin="0 0 0 10"/>
+            <Button Content="MS" HorizontalContentAlignment="Center" 
+                    VerticalContentAlignment="Center" Background="#288ECA"
+                    Height="45" Width="100" CornerRadius="15" Command="{Binding MemorySaveCmd}"/>
+        </StackPanel>
+        
+        
+        
+        
+        <StackPanel Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Content="4" HorizontalContentAlignment="Center" 
+                    VerticalContentAlignment="Center" Background="#C2CAC2"
+                    Height="100" Width="100" CornerRadius="15" Command="{Binding NumInput}" CommandParameter="4"/>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Content="5" HorizontalContentAlignment="Center" 
+                    VerticalContentAlignment="Center" Background="#C2CAC2"
+                    Height="100" Width="100" CornerRadius="15" Command="{Binding NumInput}" CommandParameter="5"/>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Content="6" HorizontalContentAlignment="Center" 
+                    VerticalContentAlignment="Center" Background="#C2CAC2"
+                    Height="100" Width="100" CornerRadius="15" Command="{Binding NumInput}" CommandParameter="6"/>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Content="Result" HorizontalContentAlignment="Center" 
+                    VerticalContentAlignment="Center" Background="#FF9500"
+                    Height="100" Width="100" CornerRadius="15" Command="{Binding CalculateCmd}"/> 
+        </StackPanel>
+        
+        
+        
+        
+        <StackPanel Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Content="1" HorizontalContentAlignment="Center" 
+                    VerticalContentAlignment="Center" Background="#C2CAC2"
+                    Height="100" Width="100" CornerRadius="15" Command="{Binding NumInput}" CommandParameter="1"/>
+        </StackPanel>
+        <StackPanel Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Content="2" HorizontalContentAlignment="Center" 
+                    VerticalContentAlignment="Center" Background="#C2CAC2"
+                    Height="100" Width="100" CornerRadius="15" Command="{Binding NumInput}" CommandParameter="2"/>
+        </StackPanel>
+        <StackPanel Grid.Row="4" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Content="3" HorizontalContentAlignment="Center" 
+                    VerticalContentAlignment="Center" Background="#C2CAC2"
+                    Height="100" Width="100" CornerRadius="15" Command="{Binding NumInput}" CommandParameter="3"/>
+        </StackPanel>
+        <StackPanel Grid.Row="4" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Content="MC" HorizontalContentAlignment="Center" 
+                    VerticalContentAlignment="Center" Background="#FF0000"
+                    Height="100" Width="100" CornerRadius="15" Command="{Binding ClearMemoryCmd}"/>
+        </StackPanel>
+        
+        
+        
+        
+        <StackPanel Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Content="." HorizontalContentAlignment="Center" 
+                    VerticalContentAlignment="Center" Background="#C2CAC2"
+                    Height="100" Width="100" CornerRadius="15"  Command="{Binding DotCmd}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Content="0" HorizontalContentAlignment="Center" 
+                    VerticalContentAlignment="Center" Background="#C2CAC2"
+                    Height="100" Width="100" CornerRadius="15"  Command="{Binding NumInput}" CommandParameter="0"/>
+        </StackPanel>
+        <StackPanel Grid.Row="5" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Content="√" HorizontalContentAlignment="Center" 
+                    VerticalContentAlignment="Center" Background="#C2CAC2"
+                    Height="100" Width="100" CornerRadius="15"  Command="{Binding SqrtCmd}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="5" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Content="Clear" HorizontalContentAlignment="Center" 
+                    VerticalContentAlignment="Center" Background="#FF0000"
+                    Height="100" Width="100" CornerRadius="15" Command="{Binding ClearCmd}"/>
+        </StackPanel>
+    </Grid>
+    
+</Window>
