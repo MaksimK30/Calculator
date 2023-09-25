@@ -67,12 +67,7 @@ public class MainWindowViewModel : ViewModelBase
     }
     public ICommand MemoryCmd()
     {
-        if (MemoryList.Count == 0)
-        {
-            return null;
-        }
-        
-        if (MemoryList.Count > MemoryPointer)
+        if (MemoryList.Count != 0 && MemoryList.Count > MemoryPointer)
         {
             Result = MemoryList.ElementAt(MemoryPointer).ToString();
             MemoryPointer++;
@@ -174,8 +169,11 @@ public class MainWindowViewModel : ViewModelBase
     }
     public ICommand DotCmd()
     {
-        if (Result?.Length == 0 || !Char.IsDigit(Result[Result.Length - 1]))
+        if (Result.Length == 0 || !Char.IsDigit(Result[Result.Length - 1]))
+        {
             return null;
+        }
+            
 
         for (int i = Result.Length - 1; i >= 0; i--)
         {
