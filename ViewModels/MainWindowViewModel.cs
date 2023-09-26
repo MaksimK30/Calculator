@@ -23,7 +23,7 @@ public class MainWindowViewModel : ViewModelBase
     public MainWindowViewModel()
     {
         Result = "√16+8*2-4+√25/7";
-        Result = "1/5-4*√9/15-32";
+        //Result = "1/5-4*√9/15-32";
         MemoryPointer = 0;
     }
     public ICommand PlusCmd()
@@ -96,6 +96,53 @@ public class MainWindowViewModel : ViewModelBase
     }
     public ICommand CalculateCmd()
     {
+        try
+        {
+            GetPolishNotation();
+        }
+        catch (Exception ex)
+        {
+            Result = "Error";
+        }
+
+        return null;
+    }
+    private void CalculatePolishNotation(List<string> PolishString)
+    {
+        for (int i = 0; i < PolishString.Count; i++)
+        {
+            if (PolishString[i] == "√")
+            {
+                PolishString[i - 1] = Math.Sqrt(Convert.ToDouble(PolishString[i-1])).ToString();
+                PolishString.RemoveAt(i);
+                i = 0;
+            }else if (PolishString[i] == "*")
+            {
+                PolishString[i - 2] = (Convert.ToDouble(PolishString[i - 2]) * Convert.ToDouble(PolishString[i - 1])).ToString();
+                PolishString.RemoveRange(i-1, 2);
+                i = 0;
+            }else if (PolishString[i] == "/")
+            {
+                PolishString[i - 2] = (Convert.ToDouble(PolishString[i - 2]) / Convert.ToDouble(PolishString[i - 1])).ToString();
+                PolishString.RemoveRange(i-1, 2);
+                i = 0;
+            }else if (PolishString[i] == "+")
+            {
+                PolishString[i - 2] = (Convert.ToDouble(PolishString[i - 2]) + Convert.ToDouble(PolishString[i - 1])).ToString();
+                PolishString.RemoveRange(i-1, 2);
+                i = 0;
+            }else if (PolishString[i] == "-")
+            {
+                PolishString[i - 2] = (Convert.ToDouble(PolishString[i - 2]) - Convert.ToDouble(PolishString[i - 1])).ToString();
+                PolishString.RemoveRange(i-1, 2);
+                i = 0;
+            }
+        }
+
+        Result = PolishString[0];
+    }
+    private void GetPolishNotation()
+    {
         if (Result.Length == 0)
         {
             Result = "0";
@@ -125,7 +172,7 @@ public class MainWindowViewModel : ViewModelBase
                 }
 
                 if (Stack.Count == 0 || 
-                OperationsPriopity[Stack.Last()] < OperationsPriopity[Result[i]])
+                    OperationsPriopity[Stack.Last()] < OperationsPriopity[Result[i]])
                 {
                     Stack.Add(Result[i]);
                 }
@@ -159,8 +206,7 @@ public class MainWindowViewModel : ViewModelBase
             }
         }
 
-        Result = String.Join("", OutputStr.ToArray());
-        return null;
+        CalculatePolishNotation(OutputStr);
     }
     public ICommand ClearMemoryCmd()
     {
