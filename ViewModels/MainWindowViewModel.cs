@@ -11,7 +11,6 @@ public class MainWindowViewModel : ViewModelBase
 {
     private string _Result;
     private LinkedList<double> MemoryList = new LinkedList<double>();
-    private List<string> SqrtList = new List<string>();
     private int MemoryPointer;
     private Dictionary<char, int> OperationsPriopity = new Dictionary<char, int>()
     {
@@ -19,6 +18,11 @@ public class MainWindowViewModel : ViewModelBase
         {'*', 1}, {'/', 1},
         {'√', 2}
     };
+    public string Result
+    {
+        get { return _Result; }
+        set { this.RaiseAndSetIfChanged(ref _Result, value); }
+    }
 
     public MainWindowViewModel()
     {
@@ -105,6 +109,40 @@ public class MainWindowViewModel : ViewModelBase
             Result = "Error";
         }
 
+        return null;
+    }
+    public ICommand ClearMemoryCmd()
+    {
+        MemoryList.Clear();
+        return null;
+    }
+    public ICommand DotCmd()
+    {
+        if (Result.Length == 0 || !Char.IsDigit(Result[Result.Length - 1]))
+        {
+            return null;
+        }
+            
+
+        for (int i = Result.Length - 1; i >= 0; i--)
+        {
+            if(Result[i] == '.')
+            {
+                return null;
+            }
+
+            if ("/*-+√".Contains(Result[i]))
+            {
+                break;
+            }
+        } 
+        
+        Result += ".";
+        return null;
+    }
+    public ICommand ClearCmd()
+    {
+        Result = "";
         return null;
     }
     private void CalculatePolishNotation(List<string> PolishString)
@@ -207,45 +245,6 @@ public class MainWindowViewModel : ViewModelBase
         }
 
         CalculatePolishNotation(OutputStr);
-    }
-    public ICommand ClearMemoryCmd()
-    {
-        MemoryList.Clear();
-        return null;
-    }
-    public ICommand DotCmd()
-    {
-        if (Result.Length == 0 || !Char.IsDigit(Result[Result.Length - 1]))
-        {
-            return null;
-        }
-            
-
-        for (int i = Result.Length - 1; i >= 0; i--)
-        {
-            if(Result[i] == '.')
-            {
-                return null;
-            }
-
-            if ("/*-+√".Contains(Result[i]))
-            {
-                break;
-            }
-        } 
-        
-        Result += ".";
-        return null;
-    }
-    public ICommand ClearCmd()
-    {
-        Result = "";
-        return null;
-    }
-    public string Result
-    {
-        get { return _Result; }
-        set { this.RaiseAndSetIfChanged(ref _Result, value); }
     }
 
 }
